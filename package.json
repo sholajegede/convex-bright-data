@@ -14,7 +14,16 @@
   "keywords": [
     "convex",
     "bright data",
-    "component"
+    "component",
+    "convex-component",
+    "bright-data",
+    "brightdata",
+    "serp",
+    "web-scraping",
+    "web-unlocker",
+    "search",
+    "cache",
+    "sync"
   ],
   "type": "module",
   "scripts": {
