@@ -1,7 +1,10 @@
 {
   "name": "@sholajegede/bright-data-sync",
   "description": "A bright data sync component for Convex.",
-  "repository": "github:sholajegede/bright-data-sync",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sholajegede/bright-data-sync.git"
+  },
   "homepage": "https://github.com/sholajegede/bright-data-sync#readme",
   "bugs": {
     "url": "https://github.com/sholajegede/bright-data-sync/issues"
@@ -10,6 +13,7 @@
   "license": "Apache-2.0",
   "keywords": [
     "convex",
+    "bright data",
     "component"
   ],
   "type": "module",
@@ -98,5 +102,8 @@
     "vitest": "4.0.18"
   },
   "types": "./dist/client/index.d.ts",
-  "module": "./dist/client/index.js"
+  "module": "./dist/client/index.js",
+  "dependencies": {
+    "@sholajegede/bright-data-sync": "^0.1.1-alpha.0"
+  }
 }

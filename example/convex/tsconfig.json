@@ -4,6 +4,7 @@
    * You can modify it, but some settings are required to use Convex.
    */
   "compilerOptions": {
+    "types": ["node"],
     /* These settings are not required by Convex and can be modified. */
     "allowJs": true,
     "strict": true,

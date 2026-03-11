@@ -1,6 +1,6 @@
 import { action, query } from "./_generated/server.js";
 import { components } from "./_generated/api.js";
-import { BrightDataSync } from "../../src/client/index.js";
+import { BrightDataSync } from "@sholajegede/bright-data-sync";
 import { v } from "convex/values";
 
 // Instantiate the component client — env vars are fine here (app code, not component)

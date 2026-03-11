@@ -1,5 +1,5 @@
 import { defineApp } from "convex/server";
-import brightDataSync from "../../src/component/convex.config.js";
+import brightDataSync from "@sholajegede/bright-data-sync/convex.config.js";
 
 const app = defineApp();
 app.use(brightDataSync);
