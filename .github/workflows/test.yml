@@ -27,10 +27,12 @@ jobs:
 
       - name: Install and build
         run: |
-          npm i
+          npm ci
           npm run build
+
       - name: Publish package for testing branch
-        run: npx pkg-pr-new publish || echo "Have you set up pkg-pr-new for this repo?"
+        run: npx pkg-pr-new publish || true
+
       - name: Test
         run: |
           npm run test
