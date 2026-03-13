@@ -111,8 +111,5 @@
     "vitest": "4.0.18"
   },
   "types": "./dist/client/index.d.ts",
-  "module": "./dist/client/index.js",
-  "dependencies": {
-    "@sholajegede/convex-bright-data": "^0.1.1-alpha.0"
-  }
+  "module": "./dist/client/index.js"
 }
