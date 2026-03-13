@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2
+
+- Improve reactive query docs and add security note for API token
+
 ## 0.1.1
 
 - Fix Vercel deployment

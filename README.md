@@ -3,6 +3,7 @@
 A [Convex component](https://www.convex.dev/components) that wraps [Bright Data's](https://brightdata.com) SERP API and Web Unlocker with reactive caching. Search results and scraped page content are stored in component-owned Convex tables with configurable TTLs — apps query cached results reactively, with no re-fetching if data is still fresh.
 
 [![npm version](https://badge.fury.io/js/@sholajegede%2Fconvex-bright-data.svg)](https://badge.fury.io/js/@sholajegede%2Fconvex-bright-data)
+[![Convex Component](https://www.convex.dev/components/badge/sholajegede/convex-bright-data)](https://www.convex.dev/components/sholajegede/convex-bright-data)
 
 Found a bug? Feature request? [File it here](https://github.com/sholajegede/convex-bright-data/issues).
 
