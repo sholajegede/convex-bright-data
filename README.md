@@ -57,6 +57,12 @@ export const brightData = new BrightData(components.brightData, {
 });
 ```
 
+> **Security note:** Your Bright Data API token is passed through Convex action arguments and traverses the Convex runtime on the server side. Always load it from environment variables using `process.env` in your app's Convex functions — never hardcode it or expose it in client-side code.
+>
+> ```sh
+> npx convex env set BRIGHTDATA_API_TOKEN your_token_here
+> ```
+
 ### Search the web
 ```ts
 // convex/myFunctions.ts
@@ -73,7 +79,10 @@ export const searchWeb = action({
   },
 });
 
-// Reactive query — subscribe to cached results from the frontend
+// Reactive query — subscribe to cached results from the frontend.
+// This is the key pattern: call searchWeb once to fetch and cache,
+// then useQuery on getCachedSearch to get live updates whenever the
+// cache refreshes. No polling needed — Convex pushes updates automatically.
 export const getCachedSearch = query({
   args: { query: v.string() },
   handler: async (ctx, args) => {
@@ -84,15 +93,17 @@ export const getCachedSearch = query({
 });
 ```
 ```tsx
-// React component
+// React component — subscribes reactively, re-renders when cache updates
 const results = useQuery(api.myFunctions.getCachedSearch, { query: "convex database" });
-// results.isFresh — true if within TTL
-// results.results — JSON string of search results
-// results.fetchedAt — timestamp of last fetch
+// results.isFresh   — true if still within TTL, false if stale
+// results.results   — JSON string of search results from Bright Data
+// results.fetchedAt — timestamp of when data was last fetched
+// results.expiresAt — timestamp of when the cache entry will expire
 ```
 
 ### Scrape a page
 ```ts
+// Fetch (or return cached) page content
 export const scrapePage = action({
   args: { url: v.string() },
   handler: async (ctx, args) => {
@@ -100,6 +111,8 @@ export const scrapePage = action({
   },
 });
 
+// Reactive query — subscribe to cached page content from the frontend.
+// Same pattern as search: scrape once, then useQuery for live updates.
 export const getCachedPage = query({
   args: { url: v.string() },
   handler: async (ctx, args) => {
@@ -109,9 +122,17 @@ export const getCachedPage = query({
   },
 });
 ```
+```tsx
+// React component
+const page = useQuery(api.myFunctions.getCachedPage, { url: "https://example.com" });
+// page.content    — raw HTML or text content of the scraped page
+// page.isFresh    — true if still within TTL
+// page.fetchedAt  — timestamp of last scrape
+```
 
 ### Invalidate cache
 ```ts
+// Force a fresh fetch on the next call by deleting the cached entry
 export const invalidateCache = action({
   args: {
     query: v.optional(v.string()),
@@ -121,6 +142,21 @@ export const invalidateCache = action({
     return await brightData.invalidate(ctx, args);
   },
 });
+```
+
+## How reactive queries work
+
+The component stores search results and scraped content in its own Convex tables. When you call `searchWeb` or `scrapePage`, the result is written to those tables. Any frontend component subscribed via `useQuery` on `getCachedSearch` or `getCachedPage` receives the update instantly — no polling, no websocket management, no extra infrastructure. This is standard Convex reactivity applied to external data.
+```
+User triggers searchWeb action
+        ↓
+Bright Data SERP API called
+        ↓
+Result stored in component-owned searches table
+        ↓
+All useQuery subscribers notified automatically
+        ↓
+UI updates in real time
 ```
 
 ## API
