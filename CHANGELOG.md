@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1
+
+- Fix Vercel deployment
+
 ## 0.1.0
 
 - Initial release of `@sholajegede/convex-bright-data`
