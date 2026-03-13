@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.0
+
+- Initial release
+
 ## 0.1.1-alpha.1
 
 - Update keywords for better discoverability

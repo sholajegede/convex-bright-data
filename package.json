@@ -1,5 +1,5 @@
 {
-  "name": "convex-bright-data",
+  "name": "@sholajegede/convex-bright-data",
   "description": "Cache Bright Data SERP and Web Unlocker results in Convex with configurable TTLs and reactive queries.",
   "repository": {
     "type": "git",
@@ -9,7 +9,7 @@
   "bugs": {
     "url": "https://github.com/sholajegede/convex-bright-data/issues"
   },
-  "version": "0.1.1-alpha.1",
+  "version": "0.1.0",
   "license": "Apache-2.0",
   "keywords": [
     "convex",
