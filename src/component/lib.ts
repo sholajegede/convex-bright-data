@@ -214,7 +214,6 @@ export const search = action({
     vertical: v.optional(v.string()),
     recency: v.optional(v.string()),
     ttlMs: v.optional(v.number()),
-    // Passed in from client wrapper — never stored
     brightdataApiToken: v.string(),
     brightdataSearchZone: v.optional(v.string()),
   },
@@ -224,8 +223,6 @@ export const search = action({
     fetchedAt: v.number(),
   }),
   handler: async (ctx, args) => {
-    // 1. Check cache
-    // 1. Check cache
     const cached = (await ctx.runQuery(internal.lib.getSearchByQuery, {
       query: args.query,
     })) as {
@@ -244,9 +241,7 @@ export const search = action({
       };
     }
 
-    // 2. Fetch from Bright Data SERP API
     const zone = args.brightdataSearchZone ?? "serp_api1";
-    const url = new URL("https://api.brightdata.com/request");
     const body = {
       zone,
       url: `https://www.google.com/search?q=${encodeURIComponent(args.query)}${
@@ -255,7 +250,7 @@ export const search = action({
       format: "json",
     };
 
-    const response = await fetch(url.toString(), {
+    const response = await fetch("https://api.brightdata.com/request", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -275,7 +270,6 @@ export const search = action({
     const results = await response.text();
     const now = Date.now();
 
-    // 3. Store in cache
     await ctx.runMutation(internal.lib.upsertSearch, {
       query: args.query,
       vertical: args.vertical,
@@ -301,7 +295,6 @@ export const scrape = action({
     fetchedAt: v.number(),
   }),
   handler: async (ctx, args) => {
-    // 1. Check cache
     const cached = (await ctx.runQuery(internal.lib.getPageByUrl, {
       url: args.url,
     })) as {
@@ -318,7 +311,6 @@ export const scrape = action({
       };
     }
 
-    // 2. Fetch from Bright Data Web Unlocker
     const zone = args.brightdataWebUnlockerZone ?? "web_unlocker1";
     const response = await fetch("https://api.brightdata.com/request", {
       method: "POST",
@@ -344,7 +336,6 @@ export const scrape = action({
     const content = await response.text();
     const now = Date.now();
 
-    // 3. Store in cache
     await ctx.runMutation(internal.lib.upsertPage, {
       url: args.url,
       content,

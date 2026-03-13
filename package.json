@@ -1,13 +1,13 @@
 {
-  "name": "@sholajegede/bright-data-sync",
-  "description": "A bright data sync component for Convex.",
+  "name": "convex-bright-data",
+  "description": "Cache Bright Data SERP and Web Unlocker results in Convex with configurable TTLs and reactive queries.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sholajegede/bright-data-sync.git"
+    "url": "git+https://github.com/sholajegede/convex-bright-data.git"
   },
-  "homepage": "https://github.com/sholajegede/bright-data-sync#readme",
+  "homepage": "https://github.com/sholajegede/convex-bright-data#readme",
   "bugs": {
-    "url": "https://github.com/sholajegede/bright-data-sync/issues"
+    "url": "https://github.com/sholajegede/convex-bright-data/issues"
   },
   "version": "0.1.1-alpha.1",
   "license": "Apache-2.0",
@@ -113,6 +113,6 @@
   "types": "./dist/client/index.d.ts",
   "module": "./dist/client/index.js",
   "dependencies": {
-    "@sholajegede/bright-data-sync": "^0.1.1-alpha.0"
+    "@sholajegede/convex-bright-data": "^0.1.1-alpha.0"
   }
 }

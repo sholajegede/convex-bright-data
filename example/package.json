@@ -1,5 +1,5 @@
 {
-  "name": "bright-data-sync-demo",
+  "name": "convex-bright-data-demo",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@sholajegede/bright-data-sync": "alpha",
+    "@sholajegede/convex-bright-data": "alpha",
     "convex": "^1.32.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

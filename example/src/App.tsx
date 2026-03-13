@@ -104,7 +104,7 @@ function ScrapeDemo() {
 function App() {
   return (
     <>
-      <h1>bright-data-sync</h1>
+      <h1>convex-bright-data</h1>
       <p style={{ color: "#888", marginBottom: "2rem" }}>
         Bright Data SERP + Web Unlocker with reactive Convex caching
       </p>

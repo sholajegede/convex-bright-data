@@ -1,7 +1,7 @@
 import type { GenericActionCtx, GenericDataModel } from "convex/server";
 import type { ComponentApi } from "../component/_generated/component.js";
 
-export type BrightDataSyncOptions = {
+export type BrightDataOptions = {
   /** Your Bright Data API token */
   BRIGHTDATA_API_TOKEN: string;
   /** Bright Data SERP zone name (default: "serp_api1") */
@@ -27,15 +27,15 @@ export type ScrapeArgs = {
 };
 
 /**
- * Client wrapper for the BrightDataSync Convex component.
+ * Client wrapper for the BrightData Convex component.
  *
  * @example
  * ```ts
  * // convex/brightData.ts
  * import { components } from "./_generated/api.js";
- * import { BrightDataSync } from "@sholajegede/bright-data-sync";
+ * import { BrightData } from "@sholajegede/convex-bright-data";
  *
- * export const brightData = new BrightDataSync(components.brightDataSync, {
+ * export const brightData = new BrightData(components.brightData, {
  *   BRIGHTDATA_API_TOKEN: process.env.BRIGHTDATA_API_TOKEN!,
  * });
  *
@@ -48,10 +48,10 @@ export type ScrapeArgs = {
  * });
  * ```
  */
-export class BrightDataSync {
+export class BrightData {
   constructor(
     public component: ComponentApi,
-    private options: BrightDataSyncOptions,
+    private options: BrightDataOptions,
   ) {}
 
   /**

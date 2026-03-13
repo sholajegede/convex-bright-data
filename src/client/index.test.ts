@@ -1,10 +1,10 @@
 import { describe, expect, test } from "vitest";
-import { BrightDataSync } from "./index.js";
+import { BrightData } from "./index.js";
 import { components } from "./setup.test.js";
 
-describe("BrightDataSync client", () => {
+describe("BrightData client", () => {
   test("instantiates with required options", () => {
-    const client = new BrightDataSync(components.brightDataSync, {
+    const client = new BrightData(components.brightData, {
       BRIGHTDATA_API_TOKEN: "test-token",
     });
     expect(client).toBeDefined();

@@ -21,10 +21,4 @@ export default defineSchema({
   })
     .index("by_url", ["url"])
     .index("by_expires", ["expiresAt"]),
-
-  processedRequests: defineTable({
-    requestKey: v.string(), // hash of query+vertical+recency OR url
-    type: v.union(v.literal("search"), v.literal("scrape")),
-    completedAt: v.number(),
-  }).index("by_key", ["requestKey"]),
 });

@@ -1,10 +1,10 @@
-# @sholajegede/bright-data-sync
+# @sholajegede/convex-bright-data
 
 A [Convex component](https://www.convex.dev/components) that wraps [Bright Data's](https://brightdata.com) SERP API and Web Unlocker with reactive caching. Search results and scraped page content are stored in component-owned Convex tables with configurable TTLs — apps query cached results reactively, with no re-fetching if data is still fresh.
 
-[![npm version](https://badge.fury.io/js/@sholajegede%2Fbright-data-sync.svg)](https://badge.fury.io/js/@sholajegede%2Fbright-data-sync)
+[![npm version](https://badge.fury.io/js/@sholajegede%2Fconvex-bright-data.svg)](https://badge.fury.io/js/@sholajegede%2Fconvex-bright-data)
 
-Found a bug? Feature request? [File it here](https://github.com/sholajegede/bright-data-sync/issues).
+Found a bug? Feature request? [File it here](https://github.com/sholajegede/convex-bright-data/issues).
 
 <!-- START: Include on https://convex.dev/components -->
 
@@ -26,16 +26,16 @@ Found a bug? Feature request? [File it here](https://github.com/sholajegede/brig
 
 ## Installation
 ```sh
-npm install @sholajegede/bright-data-sync
+npm install @sholajegede/convex-bright-data
 ```
 
 Add the component to your `convex/convex.config.ts`:
 ```ts
 import { defineApp } from "convex/server";
-import brightDataSync from "@sholajegede/bright-data-sync/convex.config.js";
+import brightData from "@sholajegede/convex-bright-data/convex.config.js";
 
 const app = defineApp();
-app.use(brightDataSync);
+app.use(brightData);
 
 export default app;
 ```
@@ -46,9 +46,9 @@ Instantiate the client in your Convex functions file, passing your Bright Data c
 ```ts
 // convex/brightData.ts
 import { components } from "./_generated/api.js";
-import { BrightDataSync } from "@sholajegede/bright-data-sync";
+import { BrightData } from "@sholajegede/convex-bright-data";
 
-export const brightData = new BrightDataSync(components.brightDataSync, {
+export const brightData = new BrightData(components.brightData, {
   BRIGHTDATA_API_TOKEN: process.env.BRIGHTDATA_API_TOKEN!,
   BRIGHTDATA_SEARCH_ZONE: process.env.BRIGHTDATA_SEARCH_ZONE,       // optional, default: "serp_api1"
   BRIGHTDATA_WEB_UNLOCKER_ZONE: process.env.BRIGHTDATA_WEB_UNLOCKER_ZONE, // optional, default: "web_unlocker1"
@@ -77,7 +77,7 @@ export const searchWeb = action({
 export const getCachedSearch = query({
   args: { query: v.string() },
   handler: async (ctx, args) => {
-    return await ctx.runQuery(components.brightDataSync.lib.getSearch, {
+    return await ctx.runQuery(components.brightData.lib.getSearch, {
       query: args.query,
     });
   },
@@ -103,7 +103,7 @@ export const scrapePage = action({
 export const getCachedPage = query({
   args: { url: v.string() },
   handler: async (ctx, args) => {
-    return await ctx.runQuery(components.brightDataSync.lib.getPage, {
+    return await ctx.runQuery(components.brightData.lib.getPage, {
       url: args.url,
     });
   },
@@ -125,7 +125,7 @@ export const invalidateCache = action({
 
 ## API
 
-### `BrightDataSync` class
+### `BrightData` class
 
 | Method | Description |
 |--------|-------------|
@@ -137,8 +137,8 @@ export const invalidateCache = action({
 
 | Function | Description |
 |----------|-------------|
-| `components.brightDataSync.lib.getSearch({ query })` | Get cached search result. Returns `null` if not yet fetched. |
-| `components.brightDataSync.lib.getPage({ url })` | Get cached page content. Returns `null` if not yet fetched. |
+| `components.brightData.lib.getSearch({ query })` | Get cached search result. Returns `null` if not yet fetched. |
+| `components.brightData.lib.getPage({ url })` | Get cached page content. Returns `null` if not yet fetched. |
 
 Both return `{ results/content, fetchedAt, expiresAt, isFresh }`.
 

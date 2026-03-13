@@ -49,5 +49,5 @@ export declare const internal: FilterApi<
 >;
 
 export declare const components: {
-  brightDataSync: import("@sholajegede/bright-data-sync/_generated/component.js").ComponentApi<"brightDataSync">;
+  brightData: import("../../../src/component/_generated/component.js").ComponentApi<"brightData">;
 };

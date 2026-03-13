@@ -1,10 +1,10 @@
 import { action, query } from "./_generated/server.js";
 import { components } from "./_generated/api.js";
-import { BrightDataSync } from "@sholajegede/bright-data-sync";
+import { BrightData } from "../../src/client/index.js";
 import { v } from "convex/values";
 
 // Instantiate the component client — env vars are fine here (app code, not component)
-const brightData = new BrightDataSync(components.brightDataSync, {
+const brightData = new BrightData(components.brightData, {
   BRIGHTDATA_API_TOKEN: process.env.BRIGHTDATA_API_TOKEN!,
   BRIGHTDATA_SEARCH_ZONE: process.env.BRIGHTDATA_SEARCH_ZONE,
   BRIGHTDATA_WEB_UNLOCKER_ZONE: process.env.BRIGHTDATA_WEB_UNLOCKER_ZONE,
@@ -43,7 +43,7 @@ export const scrapePage = action({
 export const getCachedSearch = query({
   args: { query: v.string() },
   handler: async (ctx, args) => {
-    return await ctx.runQuery(components.brightDataSync.lib.getSearch, {
+    return await ctx.runQuery(components.brightData.lib.getSearch, {
       query: args.query,
     });
   },
@@ -55,7 +55,7 @@ export const getCachedSearch = query({
 export const getCachedPage = query({
   args: { url: v.string() },
   handler: async (ctx, args) => {
-    return await ctx.runQuery(components.brightDataSync.lib.getPage, {
+    return await ctx.runQuery(components.brightData.lib.getPage, {
       url: args.url,
     });
   },
